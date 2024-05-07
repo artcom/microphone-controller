@@ -1,4 +1,4 @@
-name: trigger-build
+name: release
 on:
   push:
     tags:
@@ -35,10 +35,10 @@ jobs:
           name: exe
           path: dist
       - name: add build.json
-        run: 'echo "{\"version\": \"${{ github.ref }}\", \"commit\": \"${{ github.sha }}\"}" > dist/build.json'
+        run: 'echo "{\"version\": \"${{ github.ref_name }}\", \"commit\": \"${{ github.sha }}\"}" > dist/build.json'
       - name: compress release
-        run: 'zip -r microphone-controller-${{ github.ref }}.zip dist'
+        run: 'zip -r microphone-controller-${{ github.ref_name }}.zip dist'
       - name: upload release
         uses: softprops/action-gh-release@v2
         with:
-          files: microphone-controller-${{ github.ref }}.zip
+          files: microphone-controller-${{ github.ref_name }}.zip
