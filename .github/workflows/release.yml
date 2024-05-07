@@ -23,7 +23,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: exe
-          path: dist/microphone-controller.exe
+          path: dist/
 
   release:
     needs: build
@@ -37,8 +37,8 @@ jobs:
       - name: add build.json
         run: 'echo "{\"version\": \"${{ github.ref_name }}\", \"commit\": \"${{ github.sha }}\"}" > dist/build.json'
       - name: compress release
-        run: 'zip -r microphone-controller-${{ github.ref_name }}.zip dist'
+        run: 'zip -r ${{ github.event.repository.name }}"-${{ github.ref_name }}.zip dist'
       - name: upload release
         uses: softprops/action-gh-release@v2
         with:
-          files: microphone-controller-${{ github.ref_name }}.zip
+          files: ${{ github.event.repository.name }}"-${{ github.ref_name }}.zip
