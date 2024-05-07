@@ -1,0 +1,34 @@
+{
+  "name": "microphone-controller",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "bin": "src/index.js",
+  "scripts": {
+    "format": "prettier --write src",
+    "lint": "eslint src --fix",
+    "start": "node src/index.js",
+    "watch": "nodemon src/index.js"
+  },
+  "author": "ART+COM GmbH",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "@artcom/bootstrap-client": "^4.6.2",
+    "win-audio": "^3.0.3"
+  },
+  "devDependencies": {
+    "esbuild": "^0.20.2",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "nodemon": "^3.1.0",
+    "prettier": "^3.2.5"
+  },
+  "pkg": {
+    "assets": "node_modules/**/*",
+    "targets": [
+      "node20-win"
+    ],
+    "outputPath": "dist"
+  }
+}

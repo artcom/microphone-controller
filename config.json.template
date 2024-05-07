@@ -1,0 +1,5 @@
+{
+  "bootstrapServerUri": "http://bootstrap-server/device_name",
+  "currentVolumeTopic": "devices/device_name/microphone/currentVolume",
+  "setVolumeTopic": "devices/device_name/microphone/doSetVolume"
+}
