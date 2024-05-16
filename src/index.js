@@ -9,16 +9,16 @@ async function main() {
   logger.info("Config", config)
   mqttClient.on("offline", () => logger.error("Client is offline, Trying to reconnect"))
   const microphone = audio.mic
-  await mqttClient.publish(config.currentVolumeTopic, microphone.get())
-  mqttClient.subscribe(config.setVolumeTopic, async (message) => {
-    logger.info("Setting microphone volume", { volume: message })
+  await mqttClient.publish(config.currentGainTopic, microphone.get())
+  mqttClient.subscribe(config.setGainTopic, async (message) => {
+    logger.info("Setting microphone gain", { gain: message })
     if (microphone.get() !== -1) {
       microphone.set(message)
       while (microphone.get() !== message) {
         await setTimeout(100)
         microphone.set(message)
       }
-      await mqttClient.publish(config.currentVolumeTopic, microphone.get())
+      await mqttClient.publish(config.currentGainTopic, microphone.get())
     }
   })
 }

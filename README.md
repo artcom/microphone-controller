@@ -1,6 +1,6 @@
 # Microphone Controller
 
-Controls the microphone volume of a Windows machine in response to MQTT messages from a broker provided by a [bootstrap-server](https://github.com/artcom/bootstrap-server).
+Controls the microphone gain of a Windows machine in response to MQTT messages from a broker provided by a [bootstrap-server](https://github.com/artcom/bootstrap-server).
 
 ## Usage
 ### Configuration
