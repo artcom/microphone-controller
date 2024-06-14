@@ -1,4 +1,5 @@
 const audio = require("win-audio")
+const wincmd = require("node-windows")
 const { setTimeout } = require("timers/promises")
 const bootstrap = require("@artcom/bootstrap-client")
 const fs = require("fs")
@@ -20,6 +21,20 @@ async function main() {
       }
       await mqttClient.publish(config.currentGainTopic, microphone.get())
     }
+  })
+
+  mqttClient.subscribe(config.disableTopic, async () => {
+    logger.info("Disabling device")
+    wincmd.elevate(
+      `powershell.exe "Get-PnpDevice | Where-Object {$_.FriendlyName -like '${config.microphoneName} *'} | Disable-PnpDevice -Confirm:$false"`,
+    )
+  })
+
+  mqttClient.subscribe(config.enableTopic, () => {
+    logger.info("Enabling device")
+    wincmd.elevate(
+      `powershell.exe "Get-PnpDevice | Where-Object {$_.FriendlyName -like '${config.microphoneName} *'} | Enable-PnpDevice -Confirm:$false"`,
+    )
   })
 }
 

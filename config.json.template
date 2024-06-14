@@ -1,5 +1,8 @@
 {
   "bootstrapServerUri": "http://bootstrap-server/device_name",
   "currentGainTopic": "devices/device_name/microphone/currentGain",
-  "setGainTopic": "devices/device_name/microphone/doSetGain"
+  "setGainTopic": "devices/device_name/microphone/doSetGain",
+  "enableTopic": "devices/device_name/microphone/doEnable",
+  "disableTopic": "devices/device_name/microphone/doDisable",
+  "microphoneName": "Line In"
 }
