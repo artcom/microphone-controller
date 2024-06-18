@@ -9,6 +9,10 @@ async function main() {
   const { logger, mqttClient } = await bootstrap(config.bootstrapServerUri, "microphoneController")
   logger.info("Config", config)
   mqttClient.on("offline", () => logger.error("Client is offline, Trying to reconnect"))
+  logger.info("Enabling device", { device: config.microphoneName })
+  wincmd.elevate(
+    `powershell.exe "Get-PnpDevice | Where-Object {$_.FriendlyName -like '${config.microphoneName} *'} | Enable-PnpDevice -Confirm:$false"`,
+  )
   const microphone = audio.mic
   await mqttClient.publish(config.currentGainTopic, microphone.get())
   mqttClient.subscribe(config.setGainTopic, async (message) => {
