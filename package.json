@@ -14,8 +14,7 @@
   "description": "",
   "dependencies": {
     "@artcom/bootstrap-client": "^4.6.2",
-    "node-windows": "^1.0.0-beta.8",
-    "win-audio": "^3.0.3"
+    "node-windows": "^1.0.0-beta.8"
   },
   "devDependencies": {
     "esbuild": "^0.20.2",
@@ -24,12 +23,5 @@
     "eslint-plugin-import": "^2.29.1",
     "nodemon": "^3.1.0",
     "prettier": "^3.2.5"
-  },
-  "pkg": {
-    "assets": "node_modules/**/*",
-    "targets": [
-      "node20-win"
-    ],
-    "outputPath": "dist"
   }
 }
