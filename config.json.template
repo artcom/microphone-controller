@@ -2,5 +2,5 @@
   "bootstrapServerUri": "http://bootstrap-server/device_name",
   "enableTopic": "devices/device_name/microphone/doEnable",
   "disableTopic": "devices/device_name/microphone/doDisable",
-  "microphoneName": "Line In (High Definition Audio Device)"
+  "microphoneName": "Line In"
 }
