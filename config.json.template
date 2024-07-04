@@ -1,6 +1,7 @@
 {
   "bootstrapServerUri": "http://bootstrap-server/device_name",
-  "enableTopic": "devices/device_name/microphone/doEnable",
-  "disableTopic": "devices/device_name/microphone/doDisable",
-  "microphoneName": "Line In"
+  "muteTopic": "devices/device_name/microphone/doMute",
+  "unMuteTopic": "devices/device_name/microphone/doUnMute",
+  "microphoneName": "Line In",
+  "svclExePath": "C:\\Program Files\\svcl-x64\\svcl.exe"
 }

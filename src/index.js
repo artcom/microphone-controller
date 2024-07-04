@@ -10,22 +10,22 @@ async function main() {
     logger.error("No microphone name provided")
   } else {
     mqttClient.on("offline", () => logger.error("Client is offline, Trying to reconnect"))
-    logger.info("Enabling device", { device: config.microphoneName })
+    logger.info("UnMuting device", { device: config.microphoneName })
     wincmd.elevate(
-      `powershell.exe "Get-PnpDevice | Where-Object {$_.FriendlyName -like '${config.microphoneName}*'} | Enable-PnpDevice -Confirm:$false"`,
+      `${config.svclExePath} /UnMute "${config.microphoneName}"`,
     )
 
-    mqttClient.subscribe(config.disableTopic, async () => {
-      logger.info("Disabling device", { device: config.microphoneName })
+    mqttClient.subscribe(config.muteTopic, async () => {
+      logger.info("Muting device", { device: config.microphoneName })
       wincmd.elevate(
-        `powershell.exe "Get-PnpDevice | Where-Object {$_.FriendlyName -like '${config.microphoneName}*'} | Disable-PnpDevice -Confirm:$false"`,
+        `${config.svclExePath} /Mute "${config.microphoneName}"`,
       )
     })
 
-    mqttClient.subscribe(config.enableTopic, () => {
-      logger.info("Enabling device", { device: config.microphoneName })
+    mqttClient.subscribe(config.unMuteTopic, () => {
+      logger.info("UnMuting device", { device: config.microphoneName })
       wincmd.elevate(
-        `powershell.exe "Get-PnpDevice | Where-Object {$_.FriendlyName -like '${config.microphoneName}*'} | Enable-PnpDevice -Confirm:$false"`,
+        `${config.svclExePath} /UnMute "${config.microphoneName}"`,
       )
     })
   }
