@@ -11,22 +11,16 @@ async function main() {
   } else {
     mqttClient.on("offline", () => logger.error("Client is offline, Trying to reconnect"))
     logger.info("UnMuting device", { device: config.microphoneName })
-    wincmd.elevate(
-      `${config.svclExePath} /UnMute "${config.microphoneName}"`,
-    )
+    wincmd.elevate(`"${config.svclExePath}" /UnMute "${config.microphoneName}"`)
 
     mqttClient.subscribe(config.muteTopic, async () => {
       logger.info("Muting device", { device: config.microphoneName })
-      wincmd.elevate(
-        `${config.svclExePath} /Mute "${config.microphoneName}"`,
-      )
+      wincmd.elevate(`"${config.svclExePath}" /Mute "${config.microphoneName}"`)
     })
 
     mqttClient.subscribe(config.unMuteTopic, () => {
       logger.info("UnMuting device", { device: config.microphoneName })
-      wincmd.elevate(
-        `${config.svclExePath} /UnMute "${config.microphoneName}"`,
-      )
+      wincmd.elevate(`"${config.svclExePath}" /UnMute "${config.microphoneName}"`)
     })
   }
 }
