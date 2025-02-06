@@ -14,7 +14,9 @@
   "description": "",
   "dependencies": {
     "@artcom/bootstrap-client": "^4.6.2",
-    "node-windows": "^1.0.0-beta.8"
+    "@artcom/logger": "^1.6.0",
+    "node-windows": "^1.0.0-beta.8",
+    "winston-daily-rotate-file": "^5.0.0"
   },
   "devDependencies": {
     "esbuild": "^0.20.2",
