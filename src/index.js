@@ -1,22 +1,11 @@
 const wincmd = require("node-windows")
 const bootstrap = require("@artcom/bootstrap-client")
-const fs = require("fs")
-const config = JSON.parse(fs.readFileSync(readConfigFileArg()))
+const config = require("./config.js")
+const logger = require("./logger.js")
 
 async function main() {
-  const { logger, mqttClient } = await bootstrap(config.bootstrapServerUri, "microphoneController")
+  const { mqttClient } = await bootstrap(config.bootstrapServerUri, "microphoneController")
   logger.info("Config", config)
-
-  function commandCallback(error) {
-    if (error) {
-      performance.mark("commandEnd")
-      const { duration } = performance.measure("command", "commandStart", "commandEnd")
-      logger.error(duration > config.commandTimeout ? "Timeout error" : "Error", {
-        error,
-        duration,
-      })
-    }
-  }
 
   if (!config.microphoneName || config.microphoneName.length === 0) {
     logger.error("No microphone name provided")
@@ -49,13 +38,14 @@ async function main() {
   }
 }
 
-function readConfigFileArg() {
-  const args = process.argv.slice(2)[0]?.split("=")
-
-  if (args && args.length === 2 && args[0] === "configFile") {
-    return args[1]
-  } else {
-    return "config.json"
+function commandCallback(error) {
+  if (error) {
+    performance.mark("commandEnd")
+    const { duration } = performance.measure("command", "commandStart", "commandEnd")
+    logger.error(duration > config.commandTimeout ? "Timeout error" : "Error", {
+      error,
+      duration,
+    })
   }
 }
 
