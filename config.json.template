@@ -1,9 +1,9 @@
 {
   "bootstrapServerUri": "http://bootstrap-server/device_name",
-  "muteTopic": "devices/device_name/microphone/doMute",
-  "unMuteTopic": "devices/device_name/microphone/doUnMute",
+  "muteTopic": "devices/device_name/microphone/doDisable",
+  "unMuteTopic": "devices/device_name/microphone/doEnable",
   "microphoneName": "Line In",
   "svclExePath": "C:\\Program Files\\svcl-x64\\svcl.exe",
   "commandTimeout": 500,
-  "logDir": "C:\\Users\\<user>\\microphone-controller\\logs"
+  "logDir": "C:\\Users\\user_name\\microphone-controller\\logs"
 }
